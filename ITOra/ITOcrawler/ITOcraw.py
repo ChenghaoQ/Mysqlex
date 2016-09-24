@@ -26,7 +26,7 @@ def companyCrawl():
         while page <= pages:
                 urls = "http://www.itjuzi.com/company?page=%d"%page
                 try:
-                        request = requests.get(urls,headers = headers,proxies = proxy,timeout=0.10)
+                        request = requests.get(urls,headers = headers,proxies = proxy,timeout=10)
                         if request.status_code != 200:
                                 raise ConnectError("Cannot connect to server") 
                         request.encoding = 'utf8'

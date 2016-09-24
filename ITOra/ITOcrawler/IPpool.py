@@ -6,7 +6,7 @@ def ipCrawl():
         print("哎呦，IP代理池空了，准备一些吧")
         proxylist = []
         page = 1
-        while page <= 5:
+        while page <= 15:
                 urls = "http://www.kuaidaili.com/proxylist/%d/"%page
                 request = urllib.request.Request(urls,headers =header)
                 content = urllib.request.urlopen(request)
@@ -21,6 +21,9 @@ def ipCrawl():
         httplist = [httpprox for httpprox in proxylist if 'HTTPS' not in httpprox[3]]
         for each in httplist:
                 for eac in each:
-                        print(eac,end='')
+                        print(eac,end='\t')
                 print("\n")  
         return httplist
+
+
+ipCrawl()
