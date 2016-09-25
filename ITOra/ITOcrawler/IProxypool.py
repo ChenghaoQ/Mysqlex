@@ -14,7 +14,6 @@ class ProxySeeker(threading.Thread):
                 self.thread_type = thread_type 
         def run(self):
                 print("线程 %d 开始工作"%self.thread_id)
-                print(self.thread_type)
                 self.func(self.thread_id,self.thread_type)
                 print("线程 %d 完成任务"%self.thread_id)
 
@@ -25,8 +24,6 @@ def seeker(parafunc):
                 header = {'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6'}
                 source_name,pages,urls,repattern,thread_id,thread_type = parafunc(thread_id,thread_type)
                 global page
-                type(page[thread_type])
-                print("-----------------------------",page[thread_type]) 
                 while page[thread_type] < pages:
                         lock.acquire() #get the lock in case url get page changed by other thread before next line executed
                         page[thread_type] += 1
@@ -66,7 +63,8 @@ def xici_zh(thread_id,thread_type):
 
 def Proxypool():
         global pool
-        page = 1
+        global page
+        
         print("主线程开始...")
         thread_info = [[i,'XCDL',xici_zh] if i > 2 else [i,'KDL',kuaidaili] for i in range(1,5)]
         threads = [ProxySeeker(t_i[0],t_i[1],t_i[2]) for t_i in thread_info]
@@ -78,6 +76,8 @@ def Proxypool():
         for each in pool:
                 print(each) 
         print("主线程结束...")
+        page['KDL'] = 0
+        page['XCDL']=0
         return pool
 
 

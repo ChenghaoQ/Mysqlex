@@ -47,6 +47,7 @@ def worker(parafunc):
                                         proxypool = IProxypool.Proxypool()               
                                         proxy = get_a_proxy(proxypool,thread_id)
                                         time.sleep(60)
+                                        print("IP锁释放")
                                 lock.release()
                                 continue 
                         complist = re.findall(recomp,buff)
@@ -108,9 +109,7 @@ def get_a_proxy(pool,thread_id):
         if pool:
                 proxy = {"http":"http://%s:%s"%(pool[0][0],pool[0][1])}
                 print("线程 %d 切换到ip地址:%s"%(thread_id,pool[0][0]))
-        else:
-                proxy = None
-        del pool[0]        
-        return proxy 
+                del pool[0]        
+                return proxy 
 
 compCraw()
