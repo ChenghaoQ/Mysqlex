@@ -7,7 +7,7 @@ config={'host':'127.0.0.1',
 	'user':'root',
 	'password':passwd,#######need to clear before upload
 	'port':3306,
-	'database':'ITOrange',
+	'database':'ITO',
 	'charset':'utf8',
 	}
 def main():
